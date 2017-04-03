@@ -28,6 +28,7 @@ requirements:
   build:
     # python is for lining up vc feature (runtime)
     - python      # [win]
+    - {{ compiler('c') }}
 
 test:
   requires:
@@ -53,3 +54,4 @@ extra:
     - jjhelmus
     - msarahan
     - ocefpaf
+    - mingwandroid

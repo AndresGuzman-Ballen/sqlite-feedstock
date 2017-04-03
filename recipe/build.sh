@@ -1,10 +1,14 @@
 #!/bin/bash
 
-if [ `uname -m` == ppc64le ]; then
-    B="--build=ppc64le-linux"
+# Prevent running ldconfig when cross-compiling
+if [[ "${BUILD}" != "${HOST}" ]]; then
+  echo "#!/usr/bin/env bash" > ldconfig
+  chmod +x ldconfig
+  export PATH=${PWD}:$PATH
 fi
 
-./configure $B --enable-threadsafe \
+./configure --build=${BUILD} --host=${HOST} \
+            --enable-threadsafe \
             --enable-tempstore \
             --enable-shared=yes \
             --disable-tcl \
