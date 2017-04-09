@@ -11,8 +11,8 @@ fi
             --enable-threadsafe \
             --enable-tempstore \
             --enable-shared=yes \
+            --enable-readline \
             --disable-tcl \
-            --disable-readline \
             --prefix=$PREFIX
 make
 make check
