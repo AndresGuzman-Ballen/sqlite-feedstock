@@ -1,6 +1,5 @@
 #!/bin/bash
 
-<<<<<<< HEAD
 export LDFLAGS="$LDFLAGS $(pkg-config --libs ncurses)"
 export CPPFLAGS="$CPPFLAGS $(pkg-config --cflags-only-I ncurses)"
 export CFLAGS="$CFLAGS $(pkg-config --cflags-only-I ncurses)"
@@ -12,7 +11,7 @@ fi
 ./configure SQLITE_ENABLE_RTREE=1 \
             $B --enable-threadsafe \
             --enable-json1 \
-=======
+
 # Prevent running ldconfig when cross-compiling
 if [[ "${BUILD}" != "${HOST}" ]]; then
   echo "#!/usr/bin/env bash" > ldconfig
@@ -22,7 +21,6 @@ fi
 
 ./configure --build=${BUILD} --host=${HOST} \
             --enable-threadsafe \
->>>>>>> Add cross-compilation support
             --enable-tempstore \
             --enable-shared=yes \
             --enable-readline \

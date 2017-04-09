@@ -23,9 +23,8 @@ requirements:
     - {{ compiler('c') }}
     - pkg-config    # [not win]
   host:
-    - ncurses       # [not win]
-    - readline      # [not win and GPL_ok==1]
-    # python is for lining up vc feature (runtime)
+    - ncurses       # [unix]
+    - readline      # [unix and GPL_ok==1]
 
 test:
   commands:
