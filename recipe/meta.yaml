@@ -25,6 +25,7 @@ requirements:
   host:
     - ncurses       # [unix]
     - readline      # [unix and GPL_ok==1]
+    - libedit       # [unix and GPL_ok==0]
 
 test:
   commands:

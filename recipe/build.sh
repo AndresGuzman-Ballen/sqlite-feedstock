@@ -19,15 +19,16 @@ if [[ "${BUILD}" != "${HOST}" ]]; then
   export PATH=${PWD}:$PATH
 fi
 
-./configure --build=${BUILD} --host=${HOST} \
-            --enable-threadsafe \
-            --enable-tempstore \
-            --enable-shared=yes \
-            --enable-readline \
-            --disable-editline \
-            --disable-tcl \
-            --prefix="${PREFIX}"
+[[ "$GPL_ok" = 1 ]] && READLINE="--enable-readline --disable-editline" || READLINE="--disable-readline --enable-editline"
 
+./configure --prefix=$PREFIX     \
+            --build=${BUILD}     \
+            --host=${HOST}       \
+            --enable-threadsafe  \
+            --enable-shared=yes  \
+            $READLINE            \
+            CFLAGS="${CFLAGS} -I${PREFIX}/include" \
+            LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
 make
 make check
 make install
