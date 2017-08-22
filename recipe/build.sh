@@ -7,13 +7,16 @@ if [[ "${BUILD}" != "${HOST}" ]]; then
   export PATH=${PWD}:$PATH
 fi
 
-./configure --build=${BUILD} --host=${HOST} \
-            --enable-threadsafe \
-            --enable-tempstore \
-            --enable-shared=yes \
-            --enable-readline \
-            --disable-tcl \
-            --prefix=$PREFIX
+./configure --prefix=$PREFIX     \
+            --build=${BUILD}     \
+            --host=${HOST}       \
+            --enable-threadsafe  \
+            --enable-shared=yes  \
+            --enable-readline    \
+            --enable-editline    \
+            --disable-readline   \
+            CFLAGS="${CFLAGS} -I${PREFIX}/include" \
+            LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
 make
 make check
 make install

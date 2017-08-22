@@ -31,10 +31,10 @@ requirements:
     - {{ compiler('c') }}
 
   host:
-    - readline    # [unix]
+    - libedit     # [unix]
 
   run:
-    - readline    # [unix]
+    - libedit     # [unix]
 
   commands:
     - sqlite3 --version
