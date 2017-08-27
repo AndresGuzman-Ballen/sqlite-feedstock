@@ -21,7 +21,7 @@ fi
 
 [[ "$GPL_ok" = 1 ]] && READLINE="--enable-readline --disable-editline" || READLINE="--disable-readline --enable-editline"
 
-./configure --prefix=$PREFIX     \
+./configure --prefix=${PREFIX}   \
             --build=${BUILD}     \
             --host=${HOST}       \
             --enable-threadsafe  \
@@ -29,6 +29,8 @@ fi
             $READLINE            \
             CFLAGS="${CFLAGS} -I${PREFIX}/include" \
             LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
-make
+make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
+
+rm -rf  ${PREFIX}/share
