@@ -7,7 +7,7 @@ if [[ "${BUILD}" != "${HOST}" ]]; then
   export PATH=${PWD}:$PATH
 fi
 
-./configure --prefix=$PREFIX     \
+./configure --prefix=${PREFIX}   \
             --build=${BUILD}     \
             --host=${HOST}       \
             --enable-threadsafe  \
@@ -17,8 +17,8 @@ fi
             --disable-readline   \
             CFLAGS="${CFLAGS} -I${PREFIX}/include" \
             LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
-make
+make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
 
-rm -rf  $PREFIX/share
+rm -rf  ${PREFIX}/share
