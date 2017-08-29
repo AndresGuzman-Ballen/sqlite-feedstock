@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://www.sqlite.org/2018/sqlite-autoconf-{{ ver }}.tar.gz
-  sha256: 2824ab1238b706bc66127320afbdffb096361130e23291f26928a027b885c612
+  url: https://www.sqlite.org/{{ year }}/sqlite-autoconf-{{ version_coded }}.tar.gz
+  sha1: 48593dcd19473f25fe6fcd08048e13ddbff4c983
   patches:
     - expose_symbols.patch  # [win]
 
