@@ -1,0 +1,24 @@
+--- work/shell.c.orig	2017-12-01 15:10:25.665661064 -0500
++++ work/shell.c	2017-12-01 15:09:55.114969617 -0500
+@@ -891,6 +891,21 @@
+ */
+ static void KeccakF1600Step(SHA3Context *p){
+   int i;
++#if defined(B0)
++#undef B0
++#endif
++#if defined(B1)
++#undef B1
++#endif
++#if defined(B2)
++#undef B2
++#endif
++#if defined(B3)
++#undef B3
++#endif
++#if defined(B4)
++#undef B4
++#endif
+   u64 B0, B1, B2, B3, B4;
+   u64 C0, C1, C2, C3, C4;
+   u64 D0, D1, D2, D3, D4;

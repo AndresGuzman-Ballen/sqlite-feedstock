@@ -9,7 +9,8 @@ source:
   url: https://www.sqlite.org/{{ year }}/sqlite-autoconf-{{ version_coded }}.tar.gz
   sha1: 48593dcd19473f25fe6fcd08048e13ddbff4c983
   patches:
-    - expose_symbols.patch  # [win]
+    - 0001-expose-symbols.patch  # [win]
+    - 0002-undefine-powerpc-register-names.patch
 
 build:
   number: 2
