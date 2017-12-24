@@ -1,4 +1,4 @@
-{% set version="3.20.1" %}
+{% set version="3.21.0" %}
 {% set year="2017" %}
 {% set version_split=version.split(".") %}
 {% set major=version_split[0] %}
@@ -13,7 +13,7 @@ package:
 source:
   fn: sqlite-autoconf-{{ version_coded }}.tar.gz
   url: https://www.sqlite.org/{{ year }}/sqlite-autoconf-{{ version_coded }}.tar.gz
-  sha1: 48593dcd19473f25fe6fcd08048e13ddbff4c983
+  sha1: f56fe3407d8297fc0a68a058f4c9e6b77e83575c
   patches:
     - 0001-expose-symbols.patch  # [win]
     - 0002-undefine-powerpc-register-names.patch
