@@ -27,6 +27,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - make        # [unix]
 
   host:
     - libedit     # [unix]
