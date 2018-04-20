@@ -1,4 +1,4 @@
-{% set version="3.22.0" %}
+{% set version="3.23.1" %}
 {% set year="2018" %}
 {% set version_split=version.split(".") %}
 {% set major=version_split[0] %}
@@ -13,7 +13,7 @@ package:
 source:
   fn: sqlite-autoconf-{{ version_coded }}.tar.gz
   url: https://www.sqlite.org/{{ year }}/sqlite-autoconf-{{ version_coded }}.tar.gz
-  sha1: 2fb24ec12001926d5209d2da90d252b9825366ac
+  sha1: 0edbfd75ececb95e8e6448d6ff33df82774c9646
   patches:
     - 0001-expose-symbols.patch  # [win]
 
