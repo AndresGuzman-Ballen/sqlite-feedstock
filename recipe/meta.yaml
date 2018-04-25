@@ -18,7 +18,7 @@ source:
     - 0001-expose-symbols.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
@@ -36,6 +36,11 @@ requirements:
     - libedit       # [unix and GPL_ok==0]
     - zlib          # [osx]
 
+test:
+  downstreams:
+    - gdal
+    - python
+    - qt
   commands:
     - sqlite3 --version
     - if not exist %LIBRARY_BIN%\sqlite3.dll exit 1  # [win]
@@ -63,8 +68,5 @@ extra:
     - jjhelmus
     - msarahan
     - ocefpaf
-<<<<<<< HEAD
     - snorfalorpagus
-=======
->>>>>>> 9a659e1b590c911f40b9b7683c48fb0a6dcd3ff7
     - mingwandroid
