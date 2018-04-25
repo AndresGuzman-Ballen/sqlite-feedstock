@@ -8,10 +8,6 @@ if [ $(uname -m) == ppc64le ]; then
     export B="--build=ppc64le-linux"
 fi
 
-./configure SQLITE_ENABLE_RTREE=1 \
-            $B --enable-threadsafe \
-            --enable-json1 \
-
 # Prevent running ldconfig when cross-compiling
 if [[ "${BUILD}" != "${HOST}" ]]; then
   echo "#!/usr/bin/env bash" > ldconfig
@@ -33,10 +29,11 @@ export CPPFLAGS="${CPPFLAGS} -DSQLITE_ENABLE_COLUMN_METADATA=1 \
             --build=${BUILD}     \
             --host=${HOST}       \
             --enable-threadsafe  \
+            --enable-json1       \
             --enable-shared=yes  \
             $READLINE            \
-            CFLAGS="${CFLAGS} -I${PREFIX}/include" \
-            LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
+            $B                   \
+            SQLITE_ENABLE_RTREE=1
 make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
