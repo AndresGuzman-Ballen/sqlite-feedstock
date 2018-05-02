@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 export LDFLAGS="$LDFLAGS $(pkg-config --libs ncurses)"
 export CPPFLAGS="$CPPFLAGS $(pkg-config --cflags-only-I ncurses)"
 export CFLAGS="$CFLAGS $(pkg-config --cflags-only-I ncurses)"
@@ -15,7 +16,7 @@ if [[ "${BUILD}" != "${HOST}" ]]; then
   export PATH=${PWD}:$PATH
 fi
 
-[[ "$GPL_ok" = 1 ]] && READLINE="--enable-readline --disable-editline" || READLINE="--disable-readline --enable-editline"
+[[ "$GPL_ok" = "True" ]] && READLINE="--enable-readline --disable-editline" || READLINE="--disable-readline --enable-editline"
 
 export CPPFLAGS="${CPPFLAGS} -DSQLITE_ENABLE_COLUMN_METADATA=1 \
                              -DSQLITE_ENABLE_UNLOCK_NOTIFY \

@@ -39,15 +39,13 @@ requirements:
 test:
   downstreams:
     - gdal
-    - python
+    - python   # comment to make conda-build ignore looping here
     - qt
   commands:
     - sqlite3 --version
     - if not exist %LIBRARY_BIN%\sqlite3.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\sqlite3.lib exit 1  # [win]
     - if not exist %LIBRARY_INC%\sqlite3.h exit 1  # [win]
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://www.sqlite.org/
