@@ -18,36 +18,35 @@ source:
     - 0001-expose-symbols.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # sometimes adds new symbols.  Default behavior is OK.
     #    https://abi-laboratory.pro/tracker/timeline/sqlite/
     - {{ pin_subpackage('sqlite') }}
+  detect_binary_files_with_prefix: False
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - make        # [unix]
-
+    - make  # [not win]
   host:
-    - libedit     # [unix]
+    - libedit     # [not win]
     - zlib        # [osx]
-
-  run:
-    - libedit     # [unix]
-
+    - ncurses     # [not win]
 test:
   commands:
     - sqlite3 --version
-    - IF NOT EXIST %LIBRARY_BIN%\sqlite3.dll exit 1  # [win]
-    - IF NOT EXIST %LIBRARY_LIB%\sqlite3.lib exit 1  # [win]
-    - IF NOT EXIST %LIBRARY_INC%\sqlite3.h exit 1  # [win]
+    - if not exist %PREFIX%\Library\bin\sqlite3.dll exit 1     #  [win]
+    - if not exist %PREFIX%\Library\lib\sqlite3.lib exit 1     # [win]
+    - test -f $PREFIX/lib/libsqlite3${SHLIB_EXT}  # [not win]
+    - if not exist %PREFIX%\Library\include\sqlite3.h exit 1   # [win]
+    - test -f $PREFIX/include/sqlite3.h                        # [not win]
 
 about:
   home: http://www.sqlite.org/
   license: Public-Domain (http://www.sqlite.org/copyright.html)
   license_url: http://www.sqlite.org/copyright.html
-  summary: 'Implements a self-contained, zero-configuration, SQL database engine.'
+  summary: 'Implements a self-contained, zero-configuration, SQL database engine'
   description: |
     SQLite is a self-contained, high-reliability, embedded, full-featured,
     public-domain, SQL database engine.It is the most used database engine
@@ -62,4 +61,5 @@ extra:
     - jjhelmus
     - msarahan
     - ocefpaf
+    - snorfalorpagus
     - mingwandroid

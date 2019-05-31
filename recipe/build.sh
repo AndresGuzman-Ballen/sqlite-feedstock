@@ -14,18 +14,26 @@ export CPPFLAGS="${CPPFLAGS} -DSQLITE_ENABLE_COLUMN_METADATA=1 \
                              -DSQLITE_ENABLE_FTS3_TOKENIZER=1 \
                              -DSQLITE_SECURE_DELETE \
                              -DSQLITE_MAX_VARIABLE_NUMBER=250000 \
-                             -DSQLITE_MAX_EXPR_DEPTH=10000"
+                             -DSQLITE_MAX_EXPR_DEPTH=10000 \
+                             -DSQLITE_ENABLE_GEOPOLY \
+                             -DSQLITE_ENABLE_JSON1 \
+                             -DSQLITE_ENABLE_RTREE=1"
 
-./configure --prefix=${PREFIX}   \
-            --build=${BUILD}     \
-            --host=${HOST}       \
-            --enable-threadsafe  \
-            --enable-shared=yes  \
-            --enable-readline    \
-            --enable-editline    \
-            --disable-readline   \
+
+if [ $(uname -m) == ppc64le ]; then
+    export PPC64LE="--build=ppc64le-linux"
+fi
+
+./configure --prefix=${PREFIX} \
+            --build=${BUILD} \
+            --host=${HOST} \
+            --enable-threadsafe \
+            --enable-shared=yes \
+            --enable-editline \
+            --disable-readline \
             CFLAGS="${CFLAGS} -I${PREFIX}/include" \
-            LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
+            LDFLAGS="${LDFLAGS} -L${PREFIX}/lib" \
+            ${PPC64LE}
 make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
